@@ -50,15 +50,15 @@ app.post("/dang-ky-xet-tuyen", (req, res) => {
     });
 });
 
+// --- API Lấy danh sách thí sinh đã đăng ký xét tuyển ---
 app.get("/dang-ky-xet-tuyen", (req, res) => {
-    const sql = `
-        INSERT INTO dang_ky_xet_tuyen 
-        (ho_ten, ngay_sinh, gioi_tinh, email, so_dien_thoai, cmnd, nam_tot_nghiep, tinh_thanh, truong_thpt, ten_phuong_thuc, ten_nganh) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    const sql = "SELECT * FROM dang_ky_xet_tuyen"; // Truy vấn lấy tất cả thí sinh
     db.query(sql, (err, result) => {
-        if (err) return res.status(500).json({ success: false, message: "Lỗi server" });
-        res.json(result);
+        if (err) {
+            console.error("Lỗi khi lấy danh sách thí sinh:", err);
+            return res.status(500).json({ success: false, message: "Lỗi hệ thống" });
+        }
+        res.json(result); // Trả về danh sách thí sinh
     });
 });
 

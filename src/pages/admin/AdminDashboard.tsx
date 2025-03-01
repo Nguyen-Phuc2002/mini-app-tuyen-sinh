@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AdminSidebar from "../../components/admin/AdminSidebar"; // ✅ Import Sidebar
+import React, { useState, useEffect } from "react";
+import AdminSidebar from "../../components/admin/AdminSidebar"; // Import Sidebar
+import DanhSachThiSinh from "./DanhSachThiSinh"; // Import danh sách thí sinh
+import { useNavigate } from "react-router-dom"; 
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
     const [admin, setAdmin] = useState<any>(null);
+    const [activeTab, setActiveTab] = useState<string>(""); // Trạng thái của tab
 
     useEffect(() => {
         const adminData = localStorage.getItem("admin");
@@ -16,17 +18,24 @@ const AdminDashboard = () => {
         }
     }, [navigate]);
 
+    const handleTabChange = (tab: string) => {
+        setActiveTab(tab); // Cập nhật khi người dùng nhấn vào tab
+    };
+
     return (
         <div className="flex">
             {/* ✅ Hiển thị Sidebar */}
-            <AdminSidebar />
+            <AdminSidebar onTabChange={handleTabChange} />
             
             {/* Nội dung chính */}
             <div className="flex-1 p-6 ml-64">
                 <h2 className="text-3xl font-bold">Trang Quản Lý</h2>
                 {admin && <p className="mb-4">Xin chào, {admin.ten_dang_nhap}!</p>}
                 <hr className="my-4" />
-                <p>Chọn chức năng từ menu bên trái...</p>
+
+                {/* Hiển thị nội dung tùy thuộc vào tab */}
+                {activeTab === "home" && <p>Chào mừng bạn đến với trang chủ quản lý!</p>}
+                {activeTab === "danhSachThiSinh" && <DanhSachThiSinh />} {/* Hiển thị danh sách thí sinh */}
             </div>
         </div>
     );

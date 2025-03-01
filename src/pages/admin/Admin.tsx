@@ -1,15 +1,15 @@
-// Desc: Admin page
-
-import React from "react";
+import { Routes, Route } from "react-router-dom";
 import DanhSachThiSinh from "./DanhSachThiSinh";
+import AdminDashboard from "./AdminDashboard";
+import React from "react";
 
 const Admin = () => {
-    return (
-        <div className="p-6">
-            <h1 className="text-3xl font-bold mb-4">Quản lý thí sinh</h1>
-            <DanhSachThiSinh />
-        </div>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<AdminDashboard />} />
+      <Route path="/danh-sach-thi-sinh" element={<DanhSachThiSinh />} />
+    </Routes>
+  );
 };
 
 export default Admin;

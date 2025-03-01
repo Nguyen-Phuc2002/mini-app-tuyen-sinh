@@ -21,7 +21,7 @@ function Router() {
       {/* Route riêng cho Admin */}
       <Route path="/admin/login" element={<DangNhapAdmin />} />
       <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/admin/thi-sinh" element={<DanhSachThiSinh />} />
+      <Route path="/admin/dang-ky-xet-tuyen" element={<DanhSachThiSinh />} />
     </Routes>
   );
 }

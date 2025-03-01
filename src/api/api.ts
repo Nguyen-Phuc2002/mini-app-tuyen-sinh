@@ -1,4 +1,4 @@
-const API_BASE_URL  = "http://192.168.1.10:3001";
+const API_BASE_URL  = "http://192.168.1.203:3001";
 
 /* --- Đăng ký xét tuyển --- */
 export const dangKyXetTuyen = async (data: {
@@ -24,31 +24,31 @@ export const dangKyXetTuyen = async (data: {
 
 export const layDanhSachDangKy = async () => {
     try {
-        const res = await fetch(`${API_BASE_URL }/dang-ky-xet-tuyen`);
-        return res.json();
+        const res = await fetch(`${API_BASE_URL}/dang-ky-xet-tuyen`);
+        if (!res.ok) {
+            throw new Error("Không thể lấy danh sách thí sinh.");
+        }
+        const data = await res.json();
+        console.log(data); // Kiểm tra dữ liệu trong console
+        return data; // Đảm bảo trả về dữ liệu đúng
     } catch (error) {
-        console.error("Lỗi lấy danh sách đăng ký:", error);
+        console.error("Lỗi lấy danh sách thí sinh:", error);
+        throw error;
     }
 };
+
 
 export const xoaDangKy = async (id: number) => {
     try {
         const res = await fetch(`${API_BASE_URL}/dang-ky-xet-tuyen/${id}`, {
             method: "DELETE",
         });
-        return res.json();
+        if (!res.ok) throw new Error("Không thể xóa thí sinh.");
+        return await res.json(); // Trả về kết quả xóa thành công
     } catch (error) {
         console.error("Lỗi xóa đăng ký:", error);
+        throw error;
     }
-};
-
-export const getDanhSachThiSinh: any = async () => {
-    try {
-        const res = await fetch(`${API_BASE_URL}/dang-ky-xet-tuyen`);
-        return res.json();  
-    } catch (error) {
-        console.error("Lỗi lấy danh sách thí sinh:", error);
-        }
 };
 
 

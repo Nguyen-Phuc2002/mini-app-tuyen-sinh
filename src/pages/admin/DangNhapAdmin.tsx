@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { adminLogin } from "../../api/api";
+import { useNavigate } from "react-router-dom"; // Thêm useNavigate
 import React from "react";
 
 const DangNhapAdmin = () => {
     const [tenDangNhap, setTenDangNhap] = useState("");
     const [matKhau, setMatKhau] = useState("");
     const [thongBao, setThongBao] = useState("");
+    const navigate = useNavigate(); // Khởi tạo useNavigate
 
     const handleLogin = async () => {
         try {
             const data = await adminLogin(tenDangNhap, matKhau);
             alert("Đăng nhập thành công!");
             localStorage.setItem("admin", JSON.stringify(data)); // Lưu thông tin admin
-            window.location.href = "/admin"; // Điều hướng đến trang admin
+            navigate("/admin"); // Điều hướng tới trang admin bằng react-router
         } catch (error) {
             setThongBao("Sai tài khoản hoặc mật khẩu");
         }
@@ -42,4 +44,3 @@ const DangNhapAdmin = () => {
 };
 
 export default DangNhapAdmin;
-

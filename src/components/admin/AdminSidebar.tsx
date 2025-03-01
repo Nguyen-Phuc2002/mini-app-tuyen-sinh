@@ -1,26 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Khai báo useNavigate()
 
-const AdminSidebar = () => {
+interface AdminSidebarProps {
+    onTabChange: (tab: string) => void; // Callback để thay đổi tab
+}
+
+const AdminSidebar: React.FC<AdminSidebarProps> = ({ onTabChange }) => {
+    const navigate = useNavigate(); // Khai báo useNavigate()
+
     return (
-        <div className="w-64 h-screen bg-gray-800 text-white p-4 fixed">
+        <div className="w-64 bg-gray-800 text-white min-h-screen p-4">
             <h2 className="text-xl font-bold mb-4">Quản trị</h2>
             <ul>
-                <li className="mb-2">
-                    <Link to="/admin" className="block p-2 hover:bg-gray-700">🏠 Trang chủ</Link>
+                {/* Trang chủ */}
+                <li>
+                    <button
+                        onClick={() => onTabChange("home")} // Cập nhật tab là "home"
+                        className="w-full text-left p-2 hover:bg-gray-700 flex items-center"
+                    >
+                        <span className="mr-2">🏠</span> Trang chủ
+                    </button>
                 </li>
-                <li className="mb-2">
-                    <Link to="/admin/thi-sinh" className="block p-2 hover:bg-gray-700">📋 Danh sách thí sinh</Link> {/* ✅ Sửa đúng đường dẫn */}
+
+                {/* Danh sách thí sinh */}
+                <li>
+                    <button
+                        onClick={() => onTabChange("danhSachThiSinh")} // Chuyển sang tab danh sách thí sinh
+                        className="w-full text-left p-2 hover:bg-gray-700 flex items-center"
+                    >
+                        <span className="mr-2">👩‍🎓</span> Danh sách thí sinh
+                    </button>
                 </li>
+
+                {/* Đăng xuất */}
                 <li>
                     <button
                         onClick={() => {
-                            localStorage.removeItem("admin");
-                            window.location.href = "/admin/login";
-                        }}
-                        className="w-full text-left p-2 hover:bg-red-600"
+                            localStorage.removeItem("admin"); // Xóa thông tin admin trong localStorage
+                            navigate("/admin/login"); // Điều hướng về trang đăng nhập
+                        }} // Xử lý đăng xuất
+                        className="w-full text-left p-2 hover:bg-gray-700 flex items-center"
                     >
-                        🚪 Đăng xuất
+                        <span className="mr-2">🚪</span> Đăng xuất
                     </button>
                 </li>
             </ul>

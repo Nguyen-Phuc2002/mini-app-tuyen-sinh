@@ -124,8 +124,6 @@ app.post("/admin/login", (req, res) => {
     });
 });
 
-
-
 /* 📌 API Ghi lịch sử đăng nhập của Admin --- */
 app.post("/lich-su-dang-nhap", (req, res) => {
     const { admin_id, dia_chi_ip } = req.body;

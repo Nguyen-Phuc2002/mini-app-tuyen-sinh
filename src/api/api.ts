@@ -48,7 +48,7 @@ export const getDanhSachThiSinh: any = async () => {
         return res.json();  
     } catch (error) {
         console.error("Lỗi lấy danh sách thí sinh:", error);
-    }
+        }
 };
 
 

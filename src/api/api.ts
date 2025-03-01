@@ -42,6 +42,16 @@ export const xoaDangKy = async (id: number) => {
     }
 };
 
+export const getDanhSachThiSinh: any = async () => {
+    try {
+        const res = await fetch(`${API_BASE_URL}/dang-ky-xet-tuyen`);
+        return res.json();  
+    } catch (error) {
+        console.error("Lỗi lấy danh sách thí sinh:", error);
+    }
+};
+
+
 
 /* --- Lấy danh sách ngành học --- */
 export const layDanhSachNganh = async () => {

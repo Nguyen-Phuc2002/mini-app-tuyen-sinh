@@ -8,6 +8,7 @@ import ThongBao from "../pages/ThongBao";
 import React from "react";
 import DangNhapAdmin from "../pages/admin/DangNhapAdmin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import DanhSachThiSinh from "../pages/admin/DanhSachThiSinh";
 function Router() {
   return (
     <Routes>
@@ -20,6 +21,7 @@ function Router() {
       {/* Route riêng cho Admin */}
       <Route path="/admin/login" element={<DangNhapAdmin />} />
       <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/thi-sinh" element={<DanhSachThiSinh />} />
     </Routes>
   );
 }

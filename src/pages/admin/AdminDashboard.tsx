@@ -1,13 +1,12 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminSidebar from "../../components/admin/AdminSidebar"; // ✅ Import Sidebar
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
     const [admin, setAdmin] = useState<any>(null);
 
     useEffect(() => {
-        // Kiểm tra admin đã đăng nhập chưa
         const adminData = localStorage.getItem("admin");
         if (!adminData) {
             alert("Bạn cần đăng nhập trước!");
@@ -17,19 +16,18 @@ const AdminDashboard = () => {
         }
     }, [navigate]);
 
-    const handleLogout = () => {
-        localStorage.removeItem("admin");
-        navigate("/admin/login");
-    };
-
     return (
-        <div>
-            <h2>Trang Quản Lý</h2>
-            {admin && <p>Xin chào, {admin.ten_dang_nhap}!</p>}
-            <button onClick={handleLogout}>Đăng xuất</button>
-            <hr />
-            <p>Chức năng quản trị sẽ được thêm tại đây...</p>
+        <div className="flex">
+            {/* ✅ Hiển thị Sidebar */}
+            <AdminSidebar />
             
+            {/* Nội dung chính */}
+            <div className="flex-1 p-6 ml-64">
+                <h2 className="text-3xl font-bold">Trang Quản Lý</h2>
+                {admin && <p className="mb-4">Xin chào, {admin.ten_dang_nhap}!</p>}
+                <hr className="my-4" />
+                <p>Chọn chức năng từ menu bên trái...</p>
+            </div>
         </div>
     );
 };

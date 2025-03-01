@@ -124,14 +124,7 @@ app.post("/admin/login", (req, res) => {
     });
 });
 
-// API lấy danh sách thí sinh
-app.get("/api/thi-sinh", (req, res) => {
-    const sql = "SELECT * FROM dang_ky_xet_tuyen ORDER BY ngay_dang_ky DESC";
-    db.query(sql, (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(result);
-    });
-});
+
 
 /* 📌 API Ghi lịch sử đăng nhập của Admin --- */
 app.post("/lich-su-dang-nhap", (req, res) => {

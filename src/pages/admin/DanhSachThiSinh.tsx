@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { layDanhSachDangKy } from "../../api/api"; // API để lấy danh sách thí sinh
+import * as XLSX from "xlsx"; // Import thư viện SheetJS
 
 interface ThiSinh {
     id: number;
@@ -27,13 +28,11 @@ const formatDate = (dateStr: string) => {
 };
 
 const DanhSachThiSinh = () => {
-    const [thiSinhList, setThiSinhList] = useState<ThiSinh[]>([]);
+    const [thiSinhList, setThiSinhList] = useState<ThiSinh[]>([]); 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [searchTerm, setSearchTerm] = useState(""); // 🔍 Tìm kiếm
     const [page, setPage] = useState(1); // 📄 Phân trang
-    const [selectedThiSinh, setSelectedThiSinh] = useState<ThiSinh | null>(null); // Thí sinh đang chọn sửa
-    const [showEditModal, setShowEditModal] = useState(false); // Hiển thị modal sửa
     const pageSize = 5; // Số thí sinh mỗi trang
 
     useEffect(() => {
@@ -57,29 +56,11 @@ const DanhSachThiSinh = () => {
     const paginatedList = filteredList.slice((page - 1) * pageSize, page * pageSize);
     const totalPages = Math.ceil(filteredList.length / pageSize);
 
-    const handleDelete = (id: number) => {
-        if (window.confirm("Bạn có chắc muốn xóa thí sinh này?")) {
-            // Gọi API xóa thí sinh hoặc xử lý xóa ở đây
-            setThiSinhList((prevList) => prevList.filter((thiSinh) => thiSinh.id !== id));
-        }
-    };
-
-    const handleEdit = (thiSinh: ThiSinh) => {
-        setSelectedThiSinh(thiSinh); // Lưu thí sinh cần sửa
-        setShowEditModal(true); // Hiển thị modal sửa
-    };
-
-    const handleSaveEdit = () => {
-        if (selectedThiSinh) {
-            // Cập nhật thông tin thí sinh trong danh sách (bạn có thể gửi API PUT để cập nhật vào cơ sở dữ liệu)
-            setThiSinhList((prevList) =>
-                prevList.map((thiSinh) =>
-                    thiSinh.id === selectedThiSinh.id ? selectedThiSinh : thiSinh
-                )
-            );
-            setShowEditModal(false); // Đóng modal
-            alert("Cập nhật thành công!");
-        }
+    const handleExportExcel = () => {
+        const ws = XLSX.utils.json_to_sheet(thiSinhList); // Chuyển đổi danh sách thí sinh thành sheet Excel
+        const wb = XLSX.utils.book_new(); // Tạo workbook mới
+        XLSX.utils.book_append_sheet(wb, ws, "Danh sách thí sinh"); // Thêm sheet vào workbook
+        XLSX.writeFile(wb, "Danh_Sach_Thi_Sinh.xlsx"); // Tải xuống file Excel
     };
 
     return (
@@ -94,6 +75,7 @@ const DanhSachThiSinh = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
+
 
             {loading ? (
                 <p className="text-blue-500">Đang tải...</p>
@@ -135,14 +117,14 @@ const DanhSachThiSinh = () => {
                                     <td className="border p-2">
                                         {/* Nút Sửa */}
                                         <button
-                                            onClick={() => handleEdit(thiSinh)}
+                                            onClick={() => {}}
                                             className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
                                         >
                                             Sửa
                                         </button>
                                         {/* Nút Xóa */}
                                         <button
-                                            onClick={() => handleDelete(thiSinh.id)}
+                                            onClick={() => {}}
                                             className="bg-red-500 text-white px-3 py-1 rounded"
                                         >
                                             Xóa
@@ -170,56 +152,15 @@ const DanhSachThiSinh = () => {
                         >
                             Sau ▶️
                         </button>
+                        {/* Nút xuất Excel */}
+                        <button
+                            onClick={handleExportExcel}
+                            className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+                        >
+                            Xuất Excel
+                        </button>
                     </div>
                 </>
-            )}
-
-            {/* Modal Sửa Thí Sinh */}
-            {showEditModal && selectedThiSinh && (
-                <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                    <div className="bg-white p-4 rounded-lg w-1/3">
-                        <h2 className="text-2xl font-bold mb-4">Chỉnh sửa thí sinh</h2>
-                        <form>
-                            <div className="mb-4">
-                                <label htmlFor="ho_ten" className="block mb-2">Họ Tên</label>
-                                <input
-                                    type="text"
-                                    id="ho_ten"
-                                    className="p-2 border rounded w-full"
-                                    value={selectedThiSinh.ho_ten}
-                                    onChange={(e) => setSelectedThiSinh({ ...selectedThiSinh, ho_ten: e.target.value })}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="block mb-2">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    className="p-2 border rounded w-full"
-                                    value={selectedThiSinh.email}
-                                    onChange={(e) => setSelectedThiSinh({ ...selectedThiSinh, email: e.target.value })}
-                                />
-                            </div>
-                            {/* Thêm các trường cần thiết cho thí sinh ở đây */}
-                            <div className="flex justify-between">
-                                <button
-                                    type="button"
-                                    onClick={handleSaveEdit}
-                                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                                >
-                                    Lưu
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowEditModal(false)}
-                                    className="bg-gray-500 text-white px-4 py-2 rounded"
-                                >
-                                    Hủy
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             )}
         </div>
     );

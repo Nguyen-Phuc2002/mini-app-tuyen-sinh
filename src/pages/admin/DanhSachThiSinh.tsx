@@ -110,6 +110,8 @@ const DanhSachThiSinh = () => {
                                 <th className="border p-2">Giới Tính</th>
                                 <th className="border p-2">Email</th>
                                 <th className="border p-2">SĐT</th>
+                                <th className="border p-2">CCCD/CMND</th>
+                                <th className="border p-2">NĂM TỐT NGHIỆP</th>
                                 <th className="border p-2">Ngành</th>
                                 <th className="border p-2">Phương Thức</th>
                                 <th className="border p-2">Ngày Đăng Ký</th>
@@ -125,6 +127,8 @@ const DanhSachThiSinh = () => {
                                     <td className="border p-2">{thiSinh.gioi_tinh}</td>
                                     <td className="border p-2">{thiSinh.email}</td>
                                     <td className="border p-2">{thiSinh.so_dien_thoai}</td>
+                                    <td className="border p-2">{thiSinh.cmnd}</td>
+                                    <td className="border p-2">{thiSinh.nam_tot_nghiep}</td>
                                     <td className="border p-2">{thiSinh.ten_nganh}</td>
                                     <td className="border p-2">{thiSinh.ten_phuong_thuc}</td>
                                     <td className="border p-2">{formatDate(thiSinh.ngay_dang_ky)}</td>

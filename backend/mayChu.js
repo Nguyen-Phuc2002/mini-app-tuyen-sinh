@@ -84,6 +84,41 @@ app.get("/nganh-hoc", (req, res) => {
     });
 });
 
+/* --- API Lấy danh sách khối xét tuyển --- */
+app.get("/xet-tuyen", (req, res) => {
+    const sql = "SELECT * FROM xet_tuyen"; // Truy vấn lấy tất cả các khối xét tuyển
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error("Lỗi khi lấy danh sách khối xét tuyển:", err);
+            return res.status(500).json({ success: false, message: "Lỗi hệ thống" });
+        }
+        res.json(result); // Trả về danh sách khối xét tuyển
+    });
+});
+
+/* --- API Lấy danh sách ngành học cùng với khối xét tuyển --- */
+app.get("/nganh-xet-tuyen", (req, res) => {
+    const sql = `
+        SELECT ng.ten_nganh, ng.ma_nganh, 
+               GROUP_CONCAT(xt.khoi_xet_tuyen ORDER BY xt.khoi_xet_tuyen SEPARATOR ', ') AS khoi_xet_tuyen,
+               GROUP_CONCAT(xt.to_hop_mon ORDER BY xt.khoi_xet_tuyen SEPARATOR ', ') AS to_hop_mon
+        FROM nganh_hoc ng
+        JOIN nganh_xet_tuyen nxb ON ng.id = nxb.nganh_hoc_id
+        JOIN xet_tuyen xt ON nxb.xet_tuyen_id = xt.id
+        GROUP BY ng.id
+    `;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error("Lỗi lấy ngành học và khối xét tuyển:", err);
+            return res.status(500).json({ message: "Lỗi hệ thống" });
+        }
+        console.log(result);  // Kiểm tra dữ liệu
+        res.json(result);
+    });
+});
+
+
+
 /* --- API Lấy danh sách phương thức xét tuyển --- */
 app.get("/phuong-thuc-xet-tuyen", (req, res) => {
     const sql = "SELECT ten_phuong_thuc FROM phuong_thuc_xet_tuyen";

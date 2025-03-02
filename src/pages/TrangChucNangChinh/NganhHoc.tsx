@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { layDanhSachNganh } from "../../api/api";
+import { useNavigate } from "react-router-dom";
+import { layDanhSachNganhXetTuyen, layDanhSachXetTuyen } from "../../api/api"; // API lấy danh sách ngành học và khối xét tuyển
 
 const NganhHoc = () => {
   interface NganhHocType {
     ten_nganh: string;
     ma_nganh: string;
+    khoi_xet_tuyen: string;
+    to_hop_mon: string;
   }
 
   const [nganhHoc, setNganhHoc] = useState<NganhHocType[]>([]);
+  const [xetTuyen, setXetTuyen] = useState<any[]>([]); // Khối xét tuyển
+  const [showModal, setShowModal] = useState(false); // Điều khiển hiển thị modal
+  const [selectedNganh, setSelectedNganh] = useState<NganhHocType | null>(null); // Ngành học được chọn
+  const navigate = useNavigate(); // Khai báo useNavigate()
 
   useEffect(() => {
     const fetchNganhHoc = async () => {
       try {
-        const response = await layDanhSachNganh();
-        console.log("API response:", response); // Thêm dòng này để kiểm tra dữ liệu
+        const response = await layDanhSachNganhXetTuyen();
         if (Array.isArray(response)) {
           setNganhHoc(response);
         } else {
@@ -24,12 +30,25 @@ const NganhHoc = () => {
       }
     };
 
+    const fetchXetTuyen = async () => {
+      try {
+        const response = await layDanhSachXetTuyen();
+        if (Array.isArray(response)) {
+          setXetTuyen(response);
+        } else {
+          console.error("Unexpected response format:", response);
+        }
+      } catch (error) {
+        console.error("Lỗi lấy dữ liệu khối xét tuyển:", error);
+      }
+    };
+
     fetchNganhHoc();
+    fetchXetTuyen();
   }, []);
 
-  const handleXemChiTiet = (nganh: NganhHocType) => {
-    // Xử lý logic khi bấm nút "Xem chi tiết"
-    console.log("Xem chi tiết ngành:", nganh);
+  const handleXemChiTiet = (ma_nganh: string) => {
+    navigate(`/nganh-hoc/${ma_nganh}`); // Điều hướng đến trang chi tiết ngành học
   };
 
   return (
@@ -40,8 +59,9 @@ const NganhHoc = () => {
           nganhHoc.map((nganh, index) => (
             <div key={index} className="nganh-hoc-item">
               <h3>{nganh.ten_nganh}</h3>
-              <p>Mã ngành: {nganh.ma_nganh}</p>
-              <button onClick={() => handleXemChiTiet(nganh)}>Xem chi tiết</button>
+              <p><strong>Mã ngành:</strong> {nganh.ma_nganh}</p>
+              <p><strong>Khối Xét Tuyển:</strong> {nganh.khoi_xet_tuyen}</p>
+              <button onClick={() => handleXemChiTiet(nganh.ma_nganh)}>Xem chi tiết</button>
             </div>
           ))
         ) : (

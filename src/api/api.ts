@@ -59,7 +59,39 @@ export const layDanhSachNganh = async () => {
     return res.json();
 };
 
-/* --- Lấy danh sách phương thức xét tuyển --- */
+/* --- Lấy danh sách khối xét tuyển --- */
+export const layDanhSachXetTuyen = async () => {
+    try {
+        const res = await fetch(`${API_BASE_URL}/xet-tuyen`);
+        if (!res.ok) {
+            throw new Error("Không thể lấy danh sách khối xét tuyển.");
+        }
+        const data = await res.json();
+        console.log(data); // Kiểm tra dữ liệu trong console
+        return data; // Đảm bảo trả về dữ liệu đúng
+    } catch (error) {
+        console.error("Lỗi lấy danh sách khối xét tuyển:", error);
+        throw error;
+    }
+};
+
+// API lấy danh sách ngành học và khối xét tuyển
+export const layDanhSachNganhXetTuyen = async () => {
+    try {
+        const res = await fetch(`${API_BASE_URL}/nganh-xet-tuyen`);
+        if (!res.ok) {
+            throw new Error("Không thể lấy danh sách ngành học và khối xét tuyển.");
+        }
+        const data = await res.json();
+        console.log(data);  // Kiểm tra dữ liệu
+        return data; // Đảm bảo trả về dữ liệu đúng
+    } catch (error) {
+        console.error("Lỗi lấy danh sách ngành học và khối xét tuyển:", error);
+        throw error;
+    }
+};
+
+// Lấy danh sách phương thức xét tuyển 
 export const layDanhSachPhuongThuc = async () => {
     const res = await fetch(`${API_BASE_URL}/phuong-thuc-xet-tuyen`);
     return res.json();

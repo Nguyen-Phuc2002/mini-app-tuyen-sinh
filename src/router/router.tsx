@@ -9,6 +9,7 @@ import React from "react";
 import DangNhapAdmin from "../pages/admin/DangNhapAdmin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import DanhSachThiSinh from "../pages/admin/DanhSachThiSinh";
+import ChiTietNganhHoc from "../pages/admin/ChiTietNganhHoc";
 function Router() {
   return (
     <Routes>
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/admin/login" element={<DangNhapAdmin />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/dang-ky-xet-tuyen" element={<DanhSachThiSinh />} />
+      <Route path="/nganh-hoc/:ma_nganh" element={<ChiTietNganhHoc />} />
     </Routes>
   );
 }

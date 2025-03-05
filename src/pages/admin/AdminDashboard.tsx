@@ -30,7 +30,7 @@ const AdminDashboard = () => {
             {/* Nội dung chính */}
             <div className="flex-1 p-6">
                 <h2 className="text-3xl font-bold">Trang Quản Lý</h2>
-                {admin && <p className="mb-4">Xin chào, {admin.ten_dang_nhap}!</p>}
+                {admin && <p className="mb-4"> {admin.ten_dang_nhap}</p>}
                 <hr className="my-4" />
 
                 {/* Hiển thị nội dung tùy thuộc vào tab */}

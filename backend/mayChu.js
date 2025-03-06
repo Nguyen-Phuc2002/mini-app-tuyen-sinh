@@ -144,22 +144,65 @@ app.get("/tin-tuc", (req, res) => {
 });
 
 
-// 📌 API Đăng nhập Admin
+//📌API Đăng nhập Admin / Cán bộ
 app.post("/admin/login", (req, res) => {
     const { ten_dang_nhap, mat_khau } = req.body;
 
-    const sql = "SELECT * FROM admin WHERE ten_dang_nhap = ? AND mat_khau = ?";
-    db.query(sql, [ten_dang_nhap, mat_khau], (err, results) => {
-        if (err) return res.status(500).json({ message: "Lỗi máy chủ" });
-        if (results.length > 0) {
-            res.json({ message: "Đăng nhập thành công", admin: results[0] });
+    const sql = "SELECT id, ten_dang_nhap, quyen FROM admin WHERE ten_dang_nhap = ? AND mat_khau = ?";
+    db.query(sql, [ten_dang_nhap, mat_khau], (err, result) => {
+        if (err) return res.status(500).json({ success: false, message: "Lỗi server" });
+
+        if (result.length > 0) {
+            const user = result[0];
+            res.json({ success: true, user });
         } else {
-            res.status(401).json({ message: "Sai tài khoản hoặc mật khẩu" });
+            res.json({ success: false, message: "Sai tài khoản hoặc mật khẩu" });
         }
     });
 });
 
-/* 📌 API Ghi lịch sử đăng nhập của Admin --- */
+// 📌 API Lấy danh sách tài khoản (Admin và Cán bộ)
+app.get("/admin/tai-khoan", (req, res) => {
+    const sql = "SELECT id, ten_dang_nhap, quyen FROM admin"; // Truy vấn lấy danh sách tài khoản
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error("Lỗi khi lấy danh sách tài khoản:", err);
+            return res.status(500).json({ message: "Lỗi hệ thống" });
+        }
+        res.json(result); // Trả về danh sách tài khoản
+    });
+});
+// API Cập nhật tài khoản
+app.put("/admin/tai-khoan/:id", (req, res) => {
+    const { id } = req.params;
+    const { quyen } = req.body;
+
+    const sql = "UPDATE admin SET quyen = ? WHERE id = ?";
+    db.query(sql, [quyen, id], (err, result) => {
+        if (err) {
+            console.error("Lỗi cập nhật tài khoản:", err);
+            return res.status(500).json({ message: "Lỗi hệ thống" });
+        }
+        res.json({ message: "Cập nhật quyền thành công!" });
+    });
+});
+// API Xóa tài khoản
+app.delete("/admin/tai-khoan/:id", (req, res) => {
+    const { id } = req.params;
+
+    const sql = "DELETE FROM admin WHERE id = ?";
+    db.query(sql, [id], (err, result) => {
+        if (err) {
+            console.error("Lỗi khi xóa tài khoản:", err);
+            return res.status(500).json({ message: "Lỗi hệ thống" });
+        }
+        res.json({ message: "Xóa tài khoản thành công!" });
+    });
+});
+
+
+
+// 📌 API Ghi lịch sử đăng nhập của Admin --- */
 app.post("/lich-su-dang-nhap", (req, res) => {
     const { admin_id, dia_chi_ip } = req.body;
     const sql = "INSERT INTO lich_su_dang_nhap (admin_id, dia_chi_ip) VALUES (?, ?)";

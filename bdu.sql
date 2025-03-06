@@ -6,9 +6,9 @@ USE mini_app_tuyen_sinh;
 CREATE TABLE admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ten_dang_nhap VARCHAR(50) NOT NULL UNIQUE,
-    mat_khau VARCHAR(255) NOT NULL
+    mat_khau VARCHAR(255) NOT NULL,
+    quyen ENUM('admin', 'canbo') NOT NULL DEFAULT 'canbo'
 );
-
 
 -- Bảng ngành học
 CREATE TABLE IF NOT EXISTS nganh_hoc (
@@ -84,8 +84,21 @@ CREATE TABLE IF NOT EXISTS hinh_anh (
 );
 
 
--- Bảng tài khoản (Admin)
-INSERT INTO admin (ten_dang_nhap, mat_khau) VALUES ('admin', '123456');
+			-- Bảng tài khoản (Admin)
+-- Xóa dữ liệu cũ trước khi thêm mới (nếu cần)
+DELETE FROM tai_khoan;
+
+-- Thêm tài khoản admin
+INSERT INTO tai_khoan (ten_dang_nhap, mat_khau, quyen) 
+VALUES 
+('admin1', '123', 'admin');
+
+-- Thêm tài khoản cán bộ tuyển sinh
+INSERT INTO tai_khoan (ten_dang_nhap, mat_khau, quyen) 
+VALUES 
+('canbo1', '123456', 'canbo'),
+('canbo2', '123456', 'canbo');
+
 
 
 

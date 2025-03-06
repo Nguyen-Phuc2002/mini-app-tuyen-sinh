@@ -65,13 +65,12 @@ const DangKyXetTuyen = () => {
   };
 
   return (
-    <div>
-      <h2>Đăng ký xét tuyển</h2>
-      
-      {thongBao && thongBao.type === "error" && <ThongBaoLoi message={thongBao.message} />}
-      {thongBao && thongBao.type === "success" && <ThongBaoThanhCong message={thongBao.message} />}
+    <div>  
       
       <form onSubmit={handleSubmit}>
+      <h1 className="form-title">Đăng ký xét tuyển</h1>
+      {thongBao && thongBao.type === "error" && <ThongBaoLoi message={thongBao.message} />}
+      {thongBao && thongBao.type === "success" && <ThongBaoThanhCong message={thongBao.message} />}
         <div>
           <label>Họ và tên:</label>
           <input

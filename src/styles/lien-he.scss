@@ -1,0 +1,110 @@
+.lien-he-container {
+    background: linear-gradient(to bottom right, #e0f2fe, #fff);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .lien-he-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .lien-he-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 12px;
+  }
+  
+  .lien-he-info {
+    font-size: 16px;
+    color: #374151;
+    line-height: 1.6;
+  }
+  
+  .lien-he-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lien-he-form label {
+    text-align: left;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+  }
+  
+  .lien-he-form input,
+  .lien-he-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #93c5fd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .lien-he-form input:focus,
+  .lien-he-form textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
+    outline: none;
+  }
+  
+  .lien-he-submit {
+    margin-top: 12px;
+    padding: 10px;
+    background: #1d4ed8;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .lien-he-submit:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+  }
+  
+  .home-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1e40af;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .home-button:hover {
+    background: #2563eb;
+    transform: scale(1.1) rotate(10deg);
+  }
+  

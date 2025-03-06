@@ -53,7 +53,8 @@ const NganhHoc = () => {
 
   return (
     <div className="nganh-hoc-container">
-      <h2>Danh sách Ngành Học</h2>
+      <div className="nganh-hoc-header">
+        <h2>Danh Sách Ngành Học</h2>
       <div className="nganh-hoc-list">
         {nganhHoc.length > 0 ? (
           nganhHoc.map((nganh, index) => (
@@ -68,6 +69,7 @@ const NganhHoc = () => {
           <p>Không có dữ liệu ngành học.</p>
         )}
       </div>
+    </div>
     </div>
   );
 };

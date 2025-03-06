@@ -1,0 +1,32 @@
+/* buttons.css */
+
+/* ======= Nút chính ======= */
+.nut-chinh {
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr); /* Chia làm 2 cột */
+  
+    .nut {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      color: rgb(9, 9, 9);
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out;
+  
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  
+    .nut-dangky { background-color: $color-dangky; }
+    .nut-camnang { background-color: $color-camnang; }
+    .nut-nganhhoc { background-color: $color-nganhhoc; }
+    .nut-lienhe { background-color: $color-lienhe; }
+  }
+  

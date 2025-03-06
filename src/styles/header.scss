@@ -1,0 +1,22 @@
+/* header.css */
+
+/* ======= Header ======= */
+.tieu-de {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #1d4ed8;
+    color: white;
+    padding: 10px;
+  }
+  .tieu-de img {
+    width: 60px; /* Điều chỉnh kích thước logo */
+    height: auto;
+  }
+  .tieu-de h1 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  

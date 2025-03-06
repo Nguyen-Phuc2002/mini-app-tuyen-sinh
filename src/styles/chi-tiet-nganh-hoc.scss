@@ -1,0 +1,119 @@
+/* Container chính */
+.nganh-hoc-detail-container {
+  background: linear-gradient(135deg, #eef2f3, #dfe9f3); /* Hiệu ứng nền gradient */
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 40px auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hiệu ứng khi hover vào container */
+.nganh-hoc-detail-container:hover {
+  transform: scale(1.02);
+}
+
+/* Tiêu đề */
+.nganh-hoc-detail-container h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+/* Hiệu ứng underline dưới tiêu đề */
+.nganh-hoc-detail-container h2::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background: #2980b9;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* Các phần tử thông tin */
+.nganh-hoc-detail-container p {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Khi hover vào đoạn văn bản */
+.nganh-hoc-detail-container p:hover {
+  color: #2980b9;
+}
+
+/* Đậm các nhãn */
+.nganh-hoc-detail-container strong {
+  color: #222;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Danh sách hiển thị thông tin */
+.nganh-hoc-detail-container ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+/* Các mục trong danh sách */
+.nganh-hoc-detail-container ul li {
+  font-size: 17px;
+  color: #333;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  position: relative;
+  padding-left: 40px;
+}
+
+/* Biểu tượng trước danh sách */
+.nganh-hoc-detail-container ul li::before {
+  content: "✔️";
+  color: #27ae60;
+  font-size: 20px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Hiệu ứng khi hover vào mục danh sách */
+.nganh-hoc-detail-container ul li:hover {
+  background: #c3e6cb;
+  transform: translateX(5px);
+}
+
+/* Danh sách Phương thức Xét tuyển có dấu đầu dòng khác */
+.nganh-hoc-detail-container ul li.method::before {
+  content: "•";
+  color: #3f51b5;
+  font-size: 22px;
+}
+
+/* Animation xuất hiện mượt */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.nganh-hoc-detail-container {
+  animation: fadeIn 0.5s ease-in-out;
+}

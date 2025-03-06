@@ -1,4 +1,4 @@
-const API_BASE_URL  = "http://192.168.1.203:3001";
+const API_BASE_URL  = "http://192.168.1.12:3001";
 
 /* --- Đăng ký xét tuyển --- */
 export const dangKyXetTuyen = async (data: {
@@ -100,18 +100,76 @@ export const layDanhSachPhuongThuc = async () => {
 /* --- Đăng nhập tài khoản Admin --- */
 export const adminLogin = async (ten_dang_nhap: string, mat_khau: string) => {
     try {
-        const res = await fetch(`${API_BASE_URL }/admin/login`, {
+        const res = await fetch(`${API_BASE_URL}/admin/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ten_dang_nhap, mat_khau }),
+            body: JSON.stringify({ ten_dang_nhap, mat_khau })
         });
-        if (!res.ok) throw new Error("Đăng nhập thất bại");
-        return res.json();
+
+        return res.json(); 
     } catch (error) {
-        console.error("Lỗi đăng nhập:", error);
-        throw error;
+        console.error("Lỗi kết nối API:", error);
+        return { success: false, message: "Lỗi kết nối đến server" };
     }
 };
+
+// API Lấy danh sách tài khoản (Admin và Cán bộ)
+export const layDanhSachTaiKhoan = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/admin/tai-khoan`);
+      if (!res.ok) {
+        throw new Error("Không thể lấy danh sách tài khoản.");
+      }
+      const data = await res.json();
+      return data; // Trả về danh sách tài khoản
+    } catch (error) {
+      console.error("Lỗi lấy danh sách tài khoản:", error);
+      throw error;
+    }
+  };
+  
+  // API Cập nhật quyền tài khoản
+  export const capNhatQuyenTaiKhoan = async (id: number, quyen: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/admin/tai-khoan/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quyen }),
+      });
+  
+      if (!res.ok) {
+        throw new Error("Không thể cập nhật quyền tài khoản.");
+      }
+  
+      const data = await res.json();
+      return data; // Trả về kết quả cập nhật thành công
+    } catch (error) {
+      console.error("Lỗi cập nhật quyền tài khoản:", error);
+      throw error;
+    }
+  };
+  
+  // API Xóa tài khoản
+  export const xoaTaiKhoan = async (id: number) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/admin/tai-khoan/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!res.ok) {
+        throw new Error("Không thể xóa tài khoản.");
+      }
+  
+      const data = await res.json();
+      return data; // Trả về kết quả xóa thành công
+    } catch (error) {
+      console.error("Lỗi xóa tài khoản:", error);
+      throw error;
+    }
+  };
+  
 
 /* --- Ghi lịch sử đăng nhập Admin --- */
 export const ghiLichSuDangNhap = async (admin_id: number, dia_chi_ip: string) => {

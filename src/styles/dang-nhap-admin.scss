@@ -1,0 +1,77 @@
+/* dang-nhap-admin.css */
+
+.dang-nhap-admin {
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.dang-nhap-admin h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dang-nhap-admin input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hiệu ứng focus cho input */
+.dang-nhap-admin input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Nút đăng nhập */
+.dang-nhap-admin button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hiệu ứng hover */
+.dang-nhap-admin button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Hiệu ứng click */
+.dang-nhap-admin button:active {
+    transform: scale(0.98);
+}
+
+/* Thông báo lỗi */
+.thong-bao {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .dang-nhap-admin {
+        width: 90%;
+        padding: 20px;
+    }
+}

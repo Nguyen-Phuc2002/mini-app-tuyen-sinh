@@ -1,0 +1,17 @@
+/* banner.css */
+
+/* ======= Banner ======= */
+.banner-container {
+    display: flex;
+    justify-content: center; /* Căn giữa ngang */
+    align-items: center; /* Căn giữa dọc */
+    width: 100%;
+  }
+  
+  .banner-container img {
+    width: 100%; /* Đảm bảo ảnh luôn đầy đủ chiều ngang */
+    max-width: 600px; /* Giữ ảnh không quá lớn */
+    height: auto; /* Đảm bảo tỷ lệ không bị méo */
+    object-fit: contain; /* Giữ ảnh trong khung */
+  }
+  

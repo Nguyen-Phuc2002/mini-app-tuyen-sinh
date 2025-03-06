@@ -1,0 +1,120 @@
+/* ======= Container chính ======= */
+.nganh-hoc-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+h2 {
+  font-size: 42px;
+  font-weight: bold;
+  color: #004ba0;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ======= Danh sách ngành học ======= */
+.nganh-hoc-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0;
+}
+
+/* ======= Định dạng từng item ======= */
+.nganh-hoc-item {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.nganh-hoc-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ======= Hiệu ứng hover ======= */
+.nganh-hoc-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 150, 255, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nganh-hoc-item:hover::before {
+  transform: scaleX(1);
+}
+
+.nganh-hoc-item h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #003c8f;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.nganh-hoc-item p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+/* ======= Nút xem chi tiết ======= */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #42a5f5, #1976d2);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #1e88e5, #0d47a1);
+  transform: scale(1.05);
+}
+
+/* ======= Khi không có dữ liệu ======= */
+p.no-data {
+  text-align: center;
+  font-size: 18px;
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 20px;
+}

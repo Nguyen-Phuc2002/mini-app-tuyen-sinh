@@ -27,8 +27,8 @@ const formatDate = (dateStr: string) => {
     });
 };
 
-const DanhSachThiSinh = () => {
-    const [thiSinhList, setThiSinhList] = useState<ThiSinh[]>([]); 
+const QuanLyDangKy = () => {
+    const [thiSinhList, setThiSinhList] = useState<ThiSinh[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [searchTerm, setSearchTerm] = useState(""); // 🔍 Tìm kiếm
@@ -93,7 +93,7 @@ const DanhSachThiSinh = () => {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Danh sách thí sinh</h1>
+            <h1 className="text-2xl font-bold mb-4">Quản lý Đăng ký xét tuyển</h1>
 
             {/* 🔍 Ô tìm kiếm */}
             <input
@@ -192,32 +192,32 @@ const DanhSachThiSinh = () => {
 
             {/* Modal Sửa Thí Sinh */}
             {editingThiSinh && (
-                    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                        <div className="bg-white p-4 rounded-lg w-1/3">
+                <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+                    <div className="bg-white p-4 rounded-lg w-1/3">
                         <h2 className="text-2xl font-bold mb-4">Chỉnh sửa thí sinh</h2>
                         <form>
                             {/* Họ và tên */}
                             <div className="mb-4">
-                            <label htmlFor="ho_ten" className="block mb-2">Họ Tên</label>
-                            <input
-                                type="text"
-                                id="ho_ten"
-                                className="p-2 border rounded w-full"
-                                value={editingThiSinh.ho_ten}
-                                onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ho_ten: e.target.value })}
-                            />
+                                <label htmlFor="ho_ten" className="block mb-2">Họ Tên</label>
+                                <input
+                                    type="text"
+                                    id="ho_ten"
+                                    className="p-2 border rounded w-full"
+                                    value={editingThiSinh.ho_ten}
+                                    onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ho_ten: e.target.value })}
+                                />
                             </div>
 
                             {/* Ngày sinh */}
                             <div className="mb-4">
-                            <label htmlFor="ngay_sinh" className="block mb-2">Ngày Sinh</label>
-                            <input
-                                type="date"
-                                id="ngay_sinh"
-                                className="p-2 border rounded w-full"
-                                value={editingThiSinh.ngay_sinh}
-                                onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ngay_sinh: e.target.value })}
-                            />
+                                <label htmlFor="ngay_sinh" className="block mb-2">Ngày Sinh</label>
+                                <input
+                                    type="date"
+                                    id="ngay_sinh"
+                                    className="p-2 border rounded w-full"
+                                    value={editingThiSinh.ngay_sinh}
+                                    onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ngay_sinh: e.target.value })}
+                                />
                             </div>
 
                             {/* Giới tính */}
@@ -237,14 +237,14 @@ const DanhSachThiSinh = () => {
 
                             {/* Email */}
                             <div className="mb-4">
-                            <label htmlFor="email" className="block mb-2">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                className="p-2 border rounded w-full"
-                                value={editingThiSinh.email}
-                                onChange={(e) => setEditingThiSinh({ ...editingThiSinh, email: e.target.value })}
-                            />
+                                <label htmlFor="email" className="block mb-2">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    className="p-2 border rounded w-full"
+                                    value={editingThiSinh.email}
+                                    onChange={(e) => setEditingThiSinh({ ...editingThiSinh, email: e.target.value })}
+                                />
                             </div>
 
                             {/* Số điện thoại */}
@@ -261,14 +261,14 @@ const DanhSachThiSinh = () => {
 
                             {/* CMND/CCCD */}
                             <div className="mb-4">
-                            <label htmlFor="cmnd" className="block mb-2">CMND/CCCD</label>
-                            <input
-                                type="text"
-                                id="cmnd"
-                                className="p-2 border rounded w-full"
-                                value={editingThiSinh.cmnd}
-                                onChange={(e) => setEditingThiSinh({ ...editingThiSinh, cmnd: e.target.value })}
-                            />
+                                <label htmlFor="cmnd" className="block mb-2">CMND/CCCD</label>
+                                <input
+                                    type="text"
+                                    id="cmnd"
+                                    className="p-2 border rounded w-full"
+                                    value={editingThiSinh.cmnd}
+                                    onChange={(e) => setEditingThiSinh({ ...editingThiSinh, cmnd: e.target.value })}
+                                />
                             </div>
 
                             {/* Năm tốt nghiệp */}
@@ -309,50 +309,51 @@ const DanhSachThiSinh = () => {
 
                             {/* Ngành học */}
                             <div className="mb-4">
-                            <label htmlFor="ten_nganh" className="block mb-2">Ngành học</label>
-                            <input
-                                type="text"
-                                id="ten_nganh"
-                                className="p-2 border rounded w-full"
-                                value={editingThiSinh.ten_nganh}
-                                onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ten_nganh: e.target.value })}
-                            />
+                                <label htmlFor="ten_nganh" className="block mb-2">Ngành học</label>
+                                <input
+                                    type="text"
+                                    id="ten_nganh"
+                                    className="p-2 border rounded w-full"
+                                    value={editingThiSinh.ten_nganh}
+                                    onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ten_nganh: e.target.value })}
+                                />
                             </div>
 
                             {/* Phương thức xét tuyển */}
                             <div className="mb-4">
-                            <label htmlFor="ten_phuong_thuc" className="block mb-2">Phương thức xét tuyển</label>
-                            <input
-                                type="text"
-                                id="ten_phuong_thuc"
-                                className="p-2 border rounded w-full"
-                                value={editingThiSinh.ten_phuong_thuc}
-                                onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ten_phuong_thuc: e.target.value })}
-                            />
+                                <label htmlFor="ten_phuong_thuc" className="block mb-2">Phương thức xét tuyển</label>
+                                <input
+                                    type="text"
+                                    id="ten_phuong_thuc"
+                                    className="p-2 border rounded w-full"
+                                    value={editingThiSinh.ten_phuong_thuc}
+                                    onChange={(e) => setEditingThiSinh({ ...editingThiSinh, ten_phuong_thuc: e.target.value })}
+                                />
                             </div>
+
                             {/* Nút lưu và hủy */}
                             <div className="flex justify-between">
-                                    <button
-                                        type="button"
-                                        onClick={handleSaveEdit}
-                                        className="bg-blue-500 text-white px-4 py-2 rounded"
-                                    >
-                                        Lưu
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setEditingThiSinh(null)} // Đóng modal
-                                        className="bg-gray-500 text-white px-4 py-2 rounded"
-                                    >
-                                        Hủy
-                                    </button>
-                                    </div>
-                                </form>
-                                </div>
+                                <button
+                                    type="button"
+                                    onClick={handleSaveEdit}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                                >
+                                    Lưu
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setEditingThiSinh(null)} // Đóng modal
+                                    className="bg-gray-500 text-white px-4 py-2 rounded"
+                                >
+                                    Hủy
+                                </button>
                             </div>
-                            )}
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default DanhSachThiSinh;
+export default QuanLyDangKy;
